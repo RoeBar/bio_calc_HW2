@@ -13,7 +13,7 @@ def all_connected_motifs(n: int):
     all_edges = [(u, v) for u in V for v in V if u != v]
     motifs = []                        # list[frozenset[(u,v)]]
 
-    for mask in range(1, 1 << len(all_edges)):
+    for mask in range(1, 2 << (len(all_edges) - 1)):
         edges = [all_edges[i] for i in range(len(all_edges)) if mask & (1 << i)]
         G = nx.DiGraph()
         G.add_nodes_from(V)
