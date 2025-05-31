@@ -4,19 +4,21 @@ Dependencies:
     Python ≥ 3.8
 """
 import networkx as nx
+
+
 def all_connected_motifs(n: int):
     """Return a list of edge-lists, one per non-isomorphic connected digraph."""
     V = list(range(1, n + 1))
-    all_edges = [(u, v) for u in V for v in V if u != v]      # make full graph
-    motifs = []        # list[set[(u,v)] ] – one representative per isomorphism class
+    all_edges = [(u, v) for u in V for v in V if u != v]  # make full graph
+    motifs = []  # list[set[(u,v)] ] – one representative per isomorphism class
 
-    for mask in range(1, 1 << len(all_edges)):                # check all subgraph
-        edges = [all_edges[i] for i in range(len(all_edges)) if mask & (1 << i)] # get subgraph
+    for mask in range(1, 2 << (len(all_edges) - 1)):  # check all subgraph
+        edges = [all_edges[i] for i in range(len(all_edges)) if mask & (1 << i)]  # get subgraph
         G = nx.DiGraph()
         G.add_nodes_from(V)
         G.add_edges_from(edges)
 
-        if not nx.is_weakly_connected(G):                     # ensure “connected”
+        if not nx.is_weakly_connected(G):  # ensure “connected”
             continue
 
         # Check isomorphism against representatives already kept
@@ -30,9 +32,10 @@ def all_connected_motifs(n: int):
                 break
 
         if not iso_found:
-            motifs.append(frozenset(edges))                    # store canonical rep
+            motifs.append(frozenset(edges))  # store canonical rep
 
     return motifs
+
 
 def write_output(motifs, n):
     name = f"motifs_n={n}.txt"
@@ -46,10 +49,11 @@ def write_output(motifs, n):
             f.write("\n")
     print(f"Wrote {len(motifs)} motifs to {name}")
 
+
 def q1(n):
     motifs = all_connected_motifs(n)
     write_output(motifs, n)
 
 if __name__ == "__main__":
-    n=3
+    n = 4
     q1(n)
