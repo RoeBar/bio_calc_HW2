@@ -1,7 +1,7 @@
 """
-Dependencies
-------------
+Dependencies:
     pip install networkx
+    Python ≥ 3.8
 """
 import itertools
 import networkx as nx
@@ -94,4 +94,6 @@ def q2(n:int,file_name:str):
     write_output_q2(motifs, counts, n)
 
 if __name__ == "__main__":
-    q2(2,"input_graph.txt")
+    n=2
+    file_name="input_graph.txt"
+    q2(2,file_name)
