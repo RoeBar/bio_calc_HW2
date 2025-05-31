@@ -1,8 +1,9 @@
 """
-Requires:  networkx  (pip install networkx)
+Dependencies:
+    pip install networkx
+    Python ≥ 3.8
 """
 import networkx as nx
-import time
 def all_connected_motifs(n: int):
     """Return a list of edge-lists, one per non-isomorphic connected digraph."""
     V = list(range(1, n + 1))
@@ -50,4 +51,5 @@ def q1(n):
     write_output(motifs, n)
 
 if __name__ == "__main__":
-    q1(3)
+    n=3
+    q1(n)
